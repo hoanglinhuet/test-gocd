@@ -6,6 +6,7 @@ namespace test_gocd
     {
         static void Main(string[] args)
         {
+            throw new Exception("Errorrrrrr");
             Console.WriteLine("Hello World!");
         }
     }
