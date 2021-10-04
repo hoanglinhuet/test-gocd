@@ -1,0 +1,77 @@
+{
+  "group": "defaultGroup",
+  "name": "TestConsole",
+  "display_order_weight": -1.0,
+  "label_template": "${COUNT}",
+  "lock_behavior": "none",
+  "environment_variables": [],
+  "parameters": [],
+  "materials": [
+    {
+      "url": "https://github.com/hoanglinhuet/test-gocd.git",
+      "branch": "main",
+      "shallow_clone": false,
+      "filter": {
+        "ignore": [],
+        "includes": []
+      },
+      "auto_update": true,
+      "type": "git"
+    }
+  ],
+  "stages": [
+    {
+      "name": "buildStage",
+      "fetch_materials": true,
+      "never_cleanup_artifacts": false,
+      "clean_working_directory": false,
+      "approval": {
+        "type": "success",
+        "users": [],
+        "roles": [],
+        "allow_only_on_success": false
+      },
+      "environment_variables": [],
+      "jobs": [
+        {
+          "name": "buildJob",
+          "environment_variables": [],
+          "tabs": [],
+          "resources": [],
+          "artifacts": [],
+          "timeout": 0.0,
+          "tasks": [
+            {
+              "command": "git",
+              "timeout": -1.0,
+              "arguments": [
+                "clean",
+                "-xfd"
+              ],
+              "run_if": "passed",
+              "type": "exec"
+            },
+            {
+              "command": "dotnet",
+              "timeout": -1.0,
+              "arguments": [
+                "restore"
+              ],
+              "run_if": "passed",
+              "type": "exec"
+            },
+            {
+              "command": "dotnet",
+              "timeout": -1.0,
+              "arguments": [
+                "build"
+              ],
+              "run_if": "passed",
+              "type": "exec"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
