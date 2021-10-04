@@ -64,7 +64,7 @@
               "command": "dotnet",
               "timeout": -1.0,
               "arguments": [
-                "build"
+                "dotnet build --configuration Release"
               ],
               "run_if": "passed",
               "type": "exec"
